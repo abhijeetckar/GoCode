@@ -1,0 +1,45 @@
+1. Method vs Function
+->    The difference between method and function is actually minimal. The concept is that methods are associated with objects and defines their behavior, whereas functions are not. Go has put some syntactical flavor in defining a method that makes it look a bit different from function. But the idea at the core of elaborating our logic is pretty much the same.
+
+2.-> variadic fn func sayHello(names ...string)
+
+3.What is a closure?
+->  A closure is a function value that references variables from its containing function’s scope, even if that function has finished execution. This means that a closure can "close over" and capture the environment in which it was created.
+    ```package main
+
+    import "fmt"
+
+    func main() {
+        x := 10
+
+        // Function literal forming a closure with the variable 'x'
+        increment := func() int {
+            x++
+            return x
+        }
+
+        fmt.Println(increment()) // Prints 11
+        fmt.Println(increment()) // Prints 12
+    }```
+
+    Go functions may be closures. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+
+4. Functions as first class citizen means?
+->  It means we can assign functions to variables, pass functions as arguments to other functions, and return functions from functions.
+Functions have types in Go, just like any other variable. The type of a function is determined by its parameter types and return types.
+`type MyFunction func(int, int) int`
+
+5. What is a naked return?
+->  In Go return values may be named. If so, they are treated as variables defined at the top of the function in the function declaration.
+A return statement without arguments returns the named return values. This is known as a "naked" return.
+
+6. How are functions used as a control structure in Go?
+->  Deferred Function Calls, Anonymous Functions and Closures, Higher-Order Functions, Function Types and Interfaces
+
+7. What is the difference between methods with pointer receivers and methods with value receivers in Go?
+->  Value Receivers : Method operates on a copy of the original value. Can be used with both values and pointers when calling the method (When called on a pointer, the method receives a copy of the pointed value.)
+Pointer Receivers : Method operates directly on the original value. Can be used only with pointers when calling the method.
+
+Points to remember :
+- Go does not support default values for function parameters in the same way some other languages do. However, there are a few strategies like Variadic Parameters, Option Parameters using struct.
+- There is a function called init() that is executed before main().

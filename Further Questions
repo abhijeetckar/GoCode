@@ -1,0 +1,20 @@
+
+***Pointers***
+How and when should the unsafe package be used with pointers in Go?
+What role do pointers play in memory alignment and padding in Go? How does memory alignment impact the performance and behavior of programs?
+How do pointers behave differently when used with arrays compared to slices in Go? Discuss scenarios where using pointers with arrays or slices is beneficial.
+Explain considerations and best practices when using pointers in concurrent Goroutines to ensure memory safety. Discuss potential issues and how to avoid them
+How are pointers typically handled in Goroutines in Go?
+Explain the concept of function pointers in Go.
+
+***Structs & Interface***
+Struct Embedding vs Struct Composition. Interface Embedding vs Interface Composition
+Explore scenarios where structs are embedded with interfaces, creating a hybrid approach.
+
+***Concurrency***
+What are atomic operations, and how are they used in concurrent Go programs?
+Provide an example showcasing the use of atomic operations.
+What is a sync.Pool in Go, and how can it be used to implement worker pools? Discuss scenarios where using sync.Pool is beneficial.
+
+***Imports & Packages***
+Importing for a side effect?

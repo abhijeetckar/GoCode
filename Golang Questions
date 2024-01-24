@@ -1,0 +1,23 @@
+0. What is the difference between var, :=, and = when declaring variables?
+->  var keyword: explicitly declare a variable without initializing it immediately.
+    := : declare and initialize a variable in a single line and Go infers the type.
+
+1. Can a struct method be associated with an anonymous field? How are methods of anonymous fields accessed within the struct?
+->  When you embed an anonymous field in a struct, the methods of the embedded type become methods of the outer struct.
+The methods are accessed through the struct instance, and the embedded type's name is used to access the method.
+
+2. When should you use the new keyword, and when should you use the make function when working with pointers in Go?
+->   new() returns a pointer to a newly allocated zero-initialized value. Use with basic data types such as structs, arrays, or other value types.
+    make() returns an initialized (non-zeroed) value to the created instance. Use with slices, maps, or channels that require dynamic resizing or initialization.
+
+    We must understand that there is a built-in new() function that may be misunderstood to be used to create maps.
+    The difference is that the new() function returns a pointer to an uninitialized reference to a map.
+    This simply means that it points to a nil map. Any attempt to manipulate it at run-time will result in an error.
+
+3. Discuss common pitfalls associated with pointers in Go, and how to avoid them to ensure memory safety.
+->  Dangling Pointers, Double Free or Use After Free, Uninitialized Pointers, Using Pointers to Local Variables in Goroutines, Forgetting to Check for nil, Type Mismatch in Pointer Assignment, Unsafe Pointer Conversions
+
+4. Explain the difference between a nil pointer and a zero-valued pointer in Go.
+-> it's generally preferable to use nil explicitly when signaling uninitialized or intentionally uninitialized pointers. The zero value for pointers (nil) aligns with Go's idioms for safe and clear code.
+
+5. 

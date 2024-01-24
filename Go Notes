@@ -1,0 +1,138 @@
+The key to learning any new language is to understand the abstract principles behind it, its syntax and how to use the standard libraries and express the syntaxes in the form of a program statement.
+
+Go is a statically typed language. Statically typed means that each statement in the program is checked at compile time.
+
+After the Go compiler has been successfully installed, we need to set up a few environment variables such as 
+	GOROOT -> C:/usr/local/go (Go compiler and standard library are stored)
+
+	GOPATH -> C:/home/user/go (Go workspace)
+
+	GOBIN -> default C:/usr/local/go/bin or GOPATH/bin  (Go binaries (executable files) should be installed)
+
+	PATH -> /usr/local/go/bin:/home/user/go/bin (A general environment variable that contains a list of directories where the operating system searches for go executable files)
+
+Short variable declarations are used inside functions or methods.
+It is not possible to use short declarations while declaring global variables that are accessible across the package level.
+
+Scope - Block({}),Global(Package),Universal(Accross Package)
+
+3 Types of data types in any programming language
+1. Primitive (Numberic :- int, float, long/short. Non-numeric:- char, bool)
+2. Composite (array, string, maps, struct etc.)
+3. Abstract (list, stack, queue etc.)
+	In Go, Value Types are Basic types like integers, floats, booleans, structs, arrays. Reference Types are pointers, slices, maps, channels, and interfaces
+
+%v	the value in a default format
+	when printing structs, the plus flag (%+v) adds field names
+%T	a Go-syntax representation of the type of the value
+
+%d - the argument is treated as a digit.
+
+%s - the argument is treated as a string.
+
+%w - error wrapped in Errorf()
+
+***Arrays are passed by value to functions & assigned by value to variables, which incurs an additional cost due to copy.
+However, a way around is passing pointers to the array.
+
+***Slices are comparatively more efficient while passing as a function argument because they are always passed as a reference.
+
+***The parameters we send to the method are always passed by value
+
+coralSlice := coralArr[:] (array to slice)
+slice = append(slice[:i], slice[i+1:]...) (remove ith element)
+
+Dropping low bound values changes the capacity of slice as it drops the values from slice
+
+CE1. Although slices store items of the same type, with the use of interface we can store items of any type in an interesting way. --- ???
+
+Empty interfaces are versatile but require careful type assertions.
+
+Structs are collections of heterogenous data defined by programmers to organize information.
+
+Achieving immutability with structs involves avoiding direct modification of struct fields. CE2
+
+Slices cannot be used as map keys
+
+Keys can be any comparable type in Go. Comparable types are primitive types like strings, ints, etc. While they can be user-defined types, it’s considered best practice to keep them simple to avoid programming errors. The keys represent a unique element of the type that supports the use of operators, such as == (equality) and != (not equal). As a result, most of the Go built-in types (such as, int, float64, rune, string, most arrays and structs, custom types, pointers, etc.) can be used as keys.
+
+Any non-comparable types like arrays of structs (that do not support == and != operator) should not be used as map keys.
+
+The default zero value of a map is nil. A nil map is equivalent to an empty map except that elements can’t be added. 
+
+The fallthrough statement transfers control to the next case, regardless of whether the case condition is true or false.
+
+Go does not support string interpolation. ( X js -> `Name: ${name}, Age: ${age}`;)
+
+The immutable characteristics of Go strings ensures that the string value can never be changed, although we can assign a new value – or concatenate a new value – without changing the original value. 
+
+If there is more than one deferred statement; they are executed in the reverse order in which they were deferred.
+
+The internal memory management of Go will not claim the memory as long as there is at least one pointer pointing to that variable.
+
+By convention, the package name is the same as the last element of the import path. For instance, the "math/rand" package comprises files that begin with the statement package rand.
+
+***Rune - UTF-8 is an encoding scheme used to encode variable width characters into one to four bytes. Go supports UTF-8 characters out of the box, without any special setup, libaries, or packages. Roman characters such as the letter A can be represented by an ASCII value such as the number 65. However, with special characters such as an international character of 世, UTF-8 would be required. Go uses the rune alias type for UTF-8 data.
+
+Go uses Go Modules to configure package dependencies for importing resources. These modules are configuration files placed in your package directory that tell the compiler where to import packages from.
+
+fmt.Stringer interface || pretty-printing
+
+Struct Tag
+	PreferredFish []string  `json:"preferredFish,omitempty"`
+	Password  string    `json:"-"`
+
+module in go vs packages ?
+With Go modules, it is possible for Go projects to be located anywhere on the filesystem, not just a specific directory defined by Go.
+Go Modules can be made private by adding password
+Similar to a standard Go package, a module may contain any number of packages and sub-packages, or it may contain none at all.
+
+type assertions in go on error interface ?
+
+string || what are mutable and immutable strings
+
+https://www.developer.com/languages/reflection-in-go/
+
+https://www.digitalocean.com/community/tutorials/39/40/41
+
+In Go, goroutines aren’t able to return values like a standard function would.
+You can still use the go keyword to call a function that returns values, but those return values will be thrown out and you won’t be able to access them.
+So, what do you do when you need data from one goroutine in another goroutine if you can’t return values?
+The solution is to use a Go feature called “channels”, which allow you to send data from one goroutine to another.
+
+A Goroutine is a lightweight thread of execution in Go, managed by the Go runtime.
+Goroutines allow concurrent execution of functions, enabling efficient concurrency and parallelism in Go programs.
+They are started with the go keyword, which launches the function in a new Goroutine.
+
+Goroutines run asynchronously, meaning the main program does not wait for them to complete without WaitGroup.
+
+fan-out (multiple Goroutines writing to a channel) and fan-in (one Goroutine reading from multiple channels) patterns.
+
+
+go sync.WaitGroup
+	wg.Add(), wg.Done(), wg.Wait()
+
+Channels block when they are being written to or read from.
+
+errors.New() will only create an error with a static message
+fmt.Errorf() returns error string doesn’t print it || allows formatting the string with values, similar to fmt.Printf
+sentinel errors - fundamental errors with values that don’t change (io.EOF, sql.ErrNoRows)
+fmt.Errorf(%w) errors.Unwrap(err)
+The errors.Is function allows you to check if a specific sentinel error value is anywhere inside a wrapped error.
+	if errors.Is(err, errUhOh)
+The errors.As function allows you to get a reference to a certain type of error anywhere inside a wrapped error.
+	if errors.As(err, &valueErr) ValueErr{Value, Err}
+Custom Wrapped Errors with struct and Error() string error interface
+
+*** Generics
+you can create one or more type parameters, which act almost like function parameters, but they can hold types as values instead of data.
+
+strings.TrimSpace (formats string after accepting user input)
+strings.Fields
+
+fmt.Sprint(f) returns string format doesn’t print it
+
+
+Further Reading
+Go also provides the sync.Pool package, which allows developers to reuse memory in a pool, reducing the load on the garbage collector for short-lived objects.
+Go addresses race conditions through tools like the go run -race flag
